@@ -1,87 +1,10 @@
-STEP W2 
-1.
-仕様：
-プログラムの入力はサイズN
-N×Nの行列AとBを用意する（行列の中身は適当でOK）
-C=ABを計算する（この部分の実行時間を測定する）
-Nと実行時間の関係をグラフにする（計算量との関係は？）
-プログラミング言語はなんでもOK
-サンプル：C、Java、Python
-
-3×3行列くらいでテストして、正しく行列積が計算できていることを確認しよう
-くれぐれも、正しく動いていないプログラムの実行時間を測定しないように！
-ここで書いたプログラムは第8回の講義で使うので、それまでには完成させておいてください (◍＞◡＜◍)
-
-
-Write code to calculate C = A * B, where A, B and C are matrices of size N * N
-Measure the execution time of your code for various Ns, and plot the relationship between N and the execution time
-Sample program:
-C、Java、Python
-
-#include<cstdio>
-#include<ctime>
-
-#define N 100
-
-int main(){
-
-	int a[N][N],b[N][N],c[N][N];
-
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < n; j++)
-			scanf("%d", &a[i][j]);
-	}
-
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < n; j++)
-			scanf("%d", &b[i][j]);
-	}
-
-	clock_t begin = clock();
-
-	for(int i = 0; i < n; i++){
-		for(int j = 0; j < n; j++){
-			for(int k = 0; k < n; k++){
-				c[i][j] += a[i][k] * b[k][j];
-			}
-		}
-	}
-
-	clock_t end = clock();
-
-	double sec = double(end - begin)/CLOCKS_PER_SEC;
-
-	printf("%f",sec);
-
-	return 0;
-
-}
-
-N = 1
-0.000003
-
-N = 4
-0.000003
-
-N = 10
-0.000006
-
-N = 40
-0.000238
-
-N = 100
-0.00019
-
-N = 400
-
-0.282681
-
 2.
 木構造を使えばO(log N)、ハッシュテーブルを使えばO(1)で検索・追加・削除を実現することができて、これだけ見ればハッシュテーブルのほうがはるかに優れているように見える。ところが、現実の大規模なデータベースでは、（もちろんいろいろなものがあるが）ハッシュテーブルではなく木構造が使われることが多い。その理由を考えよ。
 
 いくつか重要な理由があるので、思いつくだけ考えてください
 次回の講義の最初で議論します(๑´ڡ`๑)
 
+答え：
 The complexity of searching / adding / removing an element is O(1) with a hash table, whereas the complexity is O(log N) with a tree. This means that a hash table is more efficient than a tree. However, large-scale database systems used in a real world tend to prefer a tree to a hash table. Consider reasons why a tree is more preferred than a hash table for those database systems.
 
 (1) tree takes up less memory space than hash table as they only reserve as much memory as needed
@@ -95,25 +18,15 @@ The complexity of searching / adding / removing an element is O(1) with a hash t
 ヒント:
 簡単な問題ではないですが、答えを導くのに特別な知識はいりません
 キャッシュの動きを整理して、よーーーく考えてみてください！
-
 答えに辿り着くかどうかより「きちんと考えること」が大事なので、「途中まで考えたけどわかんなかった☆（ゝω・）vｷｬﾋﾟ」「O(X)で動くものならできた☆（ゝω・）vｷｬﾋﾟ」などの答えで提出してくれてOKです
-Design a cache that achieves the following operations with O(1)
-When a pair of <URL, Web page> is given, find if the given pair is contained in the cache or not
-If the pair is not contained, insert the pair into the cache after evicting the least recently accessed pair
 
-Store the list of <URL, Web page> as a priority queue into a hash table, such that 
+答え：
+Store the list of <URL, Web page> as a queue into a hash table, such that 
 (1) search takes O(1) time
 (2) insert takes O(1) time
 (3) pop the front element(i.e.least recently accessed pair) takes O(1) time
+E.g. 
+Take each URL as a Key and each webpage as a corresponding Value -> Store the keys as a queue, such that when a new URL is added to the queue, the front URL is poped
+(このような構造は正しいかどうか/できるかどうかはわからないですけど…)
 
-宿題の提出方法:
-
-宿題その1：
-プログラムはGit
-リンクをメールに貼ってください
-Nと実行時間の関係のグラフと計算量に対する考察はメール
-宿題その2：
-メール
-宿題その3（余裕のある人のみ・考えたところまででOK）：
-メール
-宿題の提出や質問は、step16@google.comまで！
+/*ありがとうございます！*/
